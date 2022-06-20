@@ -1,0 +1,35 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="test name">
+  <!-- home page of application -->
+  <parameter name="webroot" value="http://10.18.3.46:8080/life/index.jsp"/>
+  
+  <!-- list of test scenes, separated by ;
+	com.github.smoketest.cbs.testScene.NewbCheck;
+	com.github.smoketest.cbs.testScene.SmokeCheck
+   -->
+  <parameter name="scenes" value="com.github.smoketest.cbs.testScene.NewCheck"/>
+  
+  <parameter name="remoteIp" value="10.18.3.80"/>
+  <parameter name="remotePort" value="4445"/>
+  <!-- set directory of report, default is "report" -->
+  <!-- <parameter name="outputDir" value="report"/> -->
+  <!-- set default wait time, default is 10s -->
+  <!-- <parameter name="default_wait_seconds" value="5"/> -->
+  <!-- set if all scene use one driver, default is true. If set to false, driver an browser will be restart before every scene -->
+  <!--<parameter name="public_driver" value="false"/> -->
+  
+  <listeners>
+     <listener class-name="com.github.smoketest.util.testNG.report.HTMLreportListenser"/>	
+  </listeners>
+  <test name="test" enabled="true">
+     <classes>
+        <!-- LocalExecuteTest for local test and RemoteExecuteTest for remote test -->
+        <class name="com.github.smoketest.launcher.seleLauncher.LocalExecuteTest">
+           <methods>
+              <!-- set browser, support ie and chrome for now-->
+              <include name="ie"/>
+           </methods>
+     	</class>
+     </classes>
+  </test>
+</suite>

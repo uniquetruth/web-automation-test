@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <title>测试执行结果报告</title>
+    <style>
+  body {
+		text-align: center;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size:14px;
+		}
+  div#wrapper {
+		margin: 0 auto;
+		padding: 0;
+		border: 0;
+		width: 1110px;
+		text-align: left;
+		}
+  div#header {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		width:100%;
+		height: 90px;
+		background-color:#efefef;
+		}
+  div#header h1 {
+	margin:15px 0 0 0px;
+	font-family:'Microsoft YaHei';
+	font-weight:bold;
+	font-size: 26px;
+	text-align:center;
+	}
+  div#header p {
+	margin: 12px 0 0 0;
+	line-height: 100%;
+	font-family:'Microsoft YaHei';
+	font-size: 16px;
+	text-align:right;
+	}
+  div.summary {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		width:100%;
+		background: transparent;
+		}
+		
+div.summary h2 {
+	margin:15px 0 0 15px;
+	font-family:'Microsoft YaHei';
+	font-weight:bold;
+	font-size: 20px;
+	color:#2C79E5;
+	}
+	
+div.summary p {
+	margin: 12px 0 0 0;
+	line-height: 150%;
+	}
+
+table.dataintable {
+	margin-top:10px;
+	border-collapse:collapse;
+	border:1px solid #aaa;
+	width:100%;
+	}
+
+table.dataintable th {
+	vertical-align:baseline;
+	padding:5px 15px 5px 5px;
+	background-color:#d5d5d5;
+	border:1px solid #aaa;
+	text-align:left;
+	}
+
+table.dataintable td {
+	vertical-align:text-top;
+	padding:5px 15px 5px 5px;
+	background-color:#efefef;
+	border:1px solid #aaa;
+	}
+table.dataintable td.fail {
+	background-color:#FF5353;
+	}
+
+table.dataintable pre {
+	width:auto;
+	margin:0;
+	padding:0;
+	border:0;
+	background-color:transparent;
+	}
+	#footer {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 20px;
+}
+div.image{
+	position: absolute;
+	left: 30px;
+}
+    </style>
+    <script type="text/javascript">
+    	var lastImgId;
+    	function showImage(id){
+    		var i = document.getElementById(id);
+    		if(i.style.display=='none'){
+    			var lasImg = document.getElementById(lastImgId);
+    			if(lasImg){
+    				lasImg.style.display = 'none';
+    			}
+    			i.style.display = 'block';
+    			lastImgId = id;
+    		}else{
+    			i.style.display = 'none';
+    		}
+    	}
+    </script>
+  </head> 
+  <body> 
+    <div id="wrapper">
+      <div id="header">
+        <h1>测试执行结果报告</h1>
+        <p>报告生成时间：2022-06-14_18-48-12</p>
+      </div>
+      <div class="summary">
+        <h2>总述</h2>
+        <table class="dataintable">
+          <tbody>
+            <tr>
+              <th width="25%">测试名称</th>
+              <th width="10%">浏览器</th>
+              <th width="15%">执行机IP</th>
+			  <th width="10%">场景总数</th>
+			  <th width="10%">通过数</th>
+			  <th width="15%">通过率</th>
+			  <th width="15%">总耗时（分钟）</th>
+		    </tr>
+		    <tr>
+		      <td>test name</td>
+		      <td>ie</td>
+		      <td>10.51.4.4</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>0%</td>
+			  <td>0.32</td>
+		    </tr>
+		  </tbody>
+	    </table>
+      </div>
+      <div class="summary">
+				<h2>测试场景执行结果统计</h2>
+				<table class="dataintable">
+					<tbody>
+						<tr>
+						  <th width="45%">场景名称</th>
+						  <th width="25%">运行结果</th>
+						  <th width="30%">总耗时（秒）</th>
+						</tr>
+	          <tr>
+						  <td class="fail"><a href="#newcheck冒烟测试">newcheck冒烟测试</a></td>
+						  <td class="fail">失败</td>
+						  <td class="fail">18.98</td>
+					  </tr>                     
+					</tbody>
+				</table>
+			</div>
+			<div class="summary">
+				<h2><a name="newcheck冒烟测试"></a>newcheck冒烟测试</h2>
+			</div>
+			<div class="details">
+				<table class="dataintable">
+					<tbody>
+						<tr>
+							<th>操作类</th>
+							<th>调用方法</th>
+							<th>定位方法</th>
+							<th>数据</th>
+						</tr>
+					  <tr>
+						  <td>通用日志</td>
+						  <td colspan="3">====== 开始登录 ==========</td>
+					  </tr>
+	          <tr>
+						  <td>[InputTextEvent]</td>
+						  <td>sendKeys</td>
+						  <td>By.id: username</td>
+						  <td>beijing</td>
+					  </tr>
+	          <tr>
+						  <td>[InputTextEvent]</td>
+						  <td>sendKeys</td>
+						  <td>By.id: password</td>
+						  <td>Uat12345</td>
+					  </tr>
+	          <tr>
+						  <td>[ElementEvent]</td>
+						  <td>click</td>
+						  <td>By.xpath: //a[text()='登录']</td>
+						  <td> </td>
+					  </tr>
+	          <tr>
+						  <td>[WindowEvent]</td>
+						  <td>changeTo</td>
+						  <td>切换至 用户选择 窗口成功</td>
+						  <td> </td>
+					  </tr>
+	          <tr>
+						  <td>[ElementEvent]</td>
+						  <td>setValue</td>
+						  <td>By.name: userName</td>
+						  <td>beijing</td>
+					  </tr>
+	          <tr>
+						  <td>[ElementEvent]</td>
+						  <td>onClick</td>
+						  <td>By.id: vaeyo-login-submit</td>
+						  <td> </td>
+					  </tr>
+					  <tr>
+						  <td>通用日志</td>
+						  <td colspan="3">====== check操作 ==========</td>
+					  </tr>
+					  <tr>
+					  	<td>截图</td>
+						  <td colspan="3">点此查看截图&nbsp;<a onclick="showImage('#screenshot#1655203692343')" href="javascript:void(0)">2022-06-14_18-48-12-REPORT-test name\1655203692343.png</a></td>
+						</tr>
+						<tr><td colspan="4" style="padding:0;border:0"><div id="#screenshot#1655203692343" class="image" style="display:none"><img src="2022-06-14_18-48-12-REPORT-test name\1655203692343.png"/></div></td></tr>
+					  <tr>
+					  	<td class="fail">异常</td>
+						  <td colspan="3">Expected condition failed: waiting for number of elements found by By.xpath: //a[@title=' subMenu'] to be more than "0". Current number: "0" (tried for 10 second(s) with 3000 milliseconds interval)
+Build info: version: '3.141.5', revision: 'd54ebd709a', time: '2018-11-06T11:42:16'
+System info: host: 'LUANFEI', ip: '10.51.4.4', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: driver.version: unknown<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:304)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.event.BaseEvent.existsWait(BaseEvent.java:112)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.event.ElementEvent.getElement(ElementEvent.java:62)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.event.ElementEvent.getElement(ElementEvent.java:72)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.cbs.testCase.MenuCase.openMenu(MenuCase.java:19)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.cbs.testScene.NewCheck.doTest(NewCheck.java:20)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.testScene.AbstractTestScene.doTest(AbstractTestScene.java:32)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.launcher.BaseLauncher.doTest(BaseLauncher.java:55)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.github.smoketest.launcher.seleLauncher.LocalExecuteTest.ie(LocalExecuteTest.java:66)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.lang.reflect.Method.invoke(Method.java:497)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.Invoker.invokeMethod(Invoker.java:580)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestRunner.privateRun(TestRunner.java:648)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestRunner.run(TestRunner.java:505)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunner.runTest(SuiteRunner.java:455)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunner.run(SuiteRunner.java:364)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestNG.runSuitesLocally(TestNG.java:1137)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestNG.runSuites(TestNG.java:1049)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.testng.TestNG.run(TestNG.java:1017)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:141)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:90)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.lang.reflect.Method.invoke(Method.java:497)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)<br/>&nbsp;&nbsp;&nbsp;&nbsp;com.sun.proxy.$Proxy2.stop(Unknown Source)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:133)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>&nbsp;&nbsp;&nbsp;&nbsp;sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.lang.reflect.Method.invoke(Method.java:497)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br/>&nbsp;&nbsp;&nbsp;&nbsp;org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)<br/>&nbsp;&nbsp;&nbsp;&nbsp;java.lang.Thread.run(Thread.java:745)<br/></td>
+						</tr>
+					</tbody>
+				</table>
+		  </div>
+		  <div id="footer">		
+	    </div>
+    </div>
+  </body> 
+</html>

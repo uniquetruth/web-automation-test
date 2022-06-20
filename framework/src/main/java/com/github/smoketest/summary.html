@@ -1,0 +1,66 @@
+<html>
+  <head>
+  </head>
+  <body>
+  
+    this is a web ui test framework based on testNG and Selenium.
+    
+    <h3>advice directories:</h3>
+    <pre><div style="background-color:#EFEFEF;border:black solid thin">root
+  ├─lib(put dependencies and framework jar)
+  ├─IEDriverServer.exe
+  ├─chromedriver.exe
+  ├─run.xml
+  └─test</div></pre>
+    <p>1. Put dependencies and framework jar into lib. Add these jars into classpath<br></br>
+    2、Put driver.exe in root directory.<br></br>
+    3、Write run.xml as entracne of testNG.<br></br>
+    4、Put test scene into test directory.<br></br>
+    5、 report directory will be created automatically.<br></br>
+    </p>
+    
+    <h3>run.xml</h3>
+    <p>Should follow all rules of TestNG and this framework. Start test by java org.testng.TestNG run.xml. Here is an example:</p>
+    <p><pre><code><div style="background-color:#EFEFEF;border:black solid thin">&lt;!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"&gt;
+&lt;suite name="suite name"&gt;
+  &lt;!-- home page of application --&gt;
+  &lt;parameter name="webroot" value="http://10.18.3.17:9001/index.jsp"/&gt;
+  &lt;!-- list of test scenes, separated by ; --&gt;
+  &lt;parameter name="scenes" 
+            value="com.github.smoketest.cbs.testScene.prodScene.ProdA;
+                   com.github.smoketest.cbs.testScene.prodScene.ProdB"/&gt;
+  &lt;parameter name="remoteIp" value="10.18.3.80"/&gt;
+  &lt;parameter name="remotePort" value="4444"/&gt;
+  &lt;!-- set directory of report, default is "report" --&gt;
+  &lt;!-- &lt;parameter name="outputDir" value="report"/&gt; --&gt;
+  
+  &lt;listeners&gt;
+     &lt;listener class-name="com.github.smoketest.util.testNG.report.HTMLreportListenser"/&gt;	
+  &lt;/listeners&gt;
+  &lt;test name="test name" enabled="true"&gt;
+     &lt;classes&gt;
+        &lt;!-- LocalExecuteTest for local test and RemoteExecuteTest for remote test --&gt;
+        &lt;class name="com.github.smoketest.launcher.seleLauncher.LocalExecuteTest"&gt;
+           &lt;methods&gt;
+              &lt;!-- set browser, support ie and chrome for now --&gt;
+              &lt;include name="chrome"/&gt;
+           &lt;/methods&gt;
+     	&lt;/class&gt;
+     &lt;/classes&gt;
+  &lt;/test&gt;
+&lt;/suite&gt;</div></code></pre><br></br></p>
+
+    <h3>about test script.</h3>
+    <p>Business test scene should extend AbstractTestScene, check javadoc in com.github.smoketest.testScene.</p>
+    <p>general operation is pre-set in com.github.smoketest.event, you can extends any of them to enhance functions.</p>
+    <p>you can write normal selenium code directly, but use com.github.smoketest.event.invoke.Invoker to manipulate element is better. Here is an example:</p>
+    <pre><code><div style="background-color:#EFEFEF;border:black solid thin">public class SampleScene extends AbstractTestScene {
+    &commat;Override
+    public void doTest() {
+        Invoker.i(InputTextEvent::sendKeys, By.id("username"), username);
+        Invoker.i(InputTextEvent::sendKeys, By.id("password"), password);
+        Invoker.i(ElementEvent::click, By.xpath("//a[text()='login']"));
+    }
+}</div></code></pre>
+  </body>
+</html>
