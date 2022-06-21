@@ -11,4 +11,5 @@ framework/bin
 framework/build
 script/bin
 script/build
+script/report
 .classpath

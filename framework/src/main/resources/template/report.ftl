@@ -126,7 +126,7 @@ div.image{
         <p>report time: ${reportTime}</p>
       </div>
       <div class="summary">
-        <h2>总述</h2>
+        <h2>Summary</h2>
         <table class="dataintable">
           <tbody>
             <tr>

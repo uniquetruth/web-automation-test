@@ -130,7 +130,8 @@ public class HTMLreportListenser implements IReporter {
 		String testClassName = s.getAllMethods().get(0).getTestClass().getName();
 		if(testClassName.endsWith("LocalExecuteTest")){
 			try {
-				runIP = InetAddress.getLocalHost().getHostAddress();
+				//it will be more complex If we want to get a real trusty IP
+				runIP = InetAddress.getLocalHost().toString();
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 				runIP = "get ip address error";

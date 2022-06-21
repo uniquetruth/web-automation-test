@@ -39,8 +39,8 @@ dependencies {
 }
 
 test {
-    systemProperties 'webdriver.ie.driver':'D:/tms_auto_ci/runFrame/IEDriverServer.exe'
-    systemProperties 'webdriver.chrome.driver':'D:/tms_auto_ci/runFrame/chromedriver.exe'
+    systemProperties 'webdriver.ie.driver':'/your directory of drivers/IEDriverServer.exe'
+    systemProperties 'webdriver.chrome.driver':'/your directory of drivers/chromedriver.exe'
     useTestNG() {
         //println 'useTestNG'
         scanForTestClasses = false

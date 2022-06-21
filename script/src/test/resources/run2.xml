@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="test name">
   <!-- home page of application -->
-  <parameter name="webroot" value="https://www.google.com"/>
+  <parameter name="webroot" value="http://10.18.3.46:8080/life/index.jsp"/>
   
   <!-- list of test scenes, separated by ;
 	com.github.smoketest.cbs.testScene.NewbCheck;
 	com.github.smoketest.cbs.testScene.SmokeCheck
    -->
-  <parameter name="scenes" value="com.github.smoketest.cbs.testScene.GoogleSearch"/>
+  <parameter name="scenes" value="com.github.smoketest.cbs.testScene.NewCheck"/>
   
   <parameter name="remoteIp" value="10.18.3.80"/>
   <parameter name="remotePort" value="4445"/>
@@ -27,7 +27,7 @@
         <class name="com.github.smoketest.launcher.seleLauncher.LocalExecuteTest">
            <methods>
               <!-- set browser, support ie and chrome for now-->
-              <include name="chrome"/>
+              <include name="ie"/>
            </methods>
      	</class>
      </classes>
