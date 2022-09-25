@@ -38,9 +38,7 @@ dependencies {
     testImplementation 'org.testng:testng:6.14.2'
 }
 
-test {
-    systemProperties 'webdriver.ie.driver':'/your directory of drivers/IEDriverServer.exe'
-    systemProperties 'webdriver.chrome.driver':'/your directory of drivers/chromedriver.exe'
+test{
     useTestNG() {
         //println 'useTestNG'
         scanForTestClasses = false

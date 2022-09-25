@@ -7,10 +7,12 @@
 	com.github.smoketest.cbs.testScene.NewbCheck;
 	com.github.smoketest.cbs.testScene.SmokeCheck
    -->
-  <parameter name="scenes" value="com.github.smoketest.cbs.testScene.GoogleSearch"/>
+  <parameter name="scenes" value="@Google_search_test"/>
   
   <parameter name="remoteIp" value="10.18.3.80"/>
   <parameter name="remotePort" value="4445"/>
+  <parameter name="chromedriver" value="D:/drivers/chromedriver.exe"/>
+  <parameter name="iedriver" value=""/>
   <!-- set directory of report, default is "report" -->
   <!-- <parameter name="outputDir" value="report"/> -->
   <!-- set default wait time, default is 10s -->
@@ -19,12 +21,12 @@
   <!--<parameter name="public_driver" value="false"/> -->
   
   <listeners>
-     <listener class-name="com.github.smoketest.util.testNG.report.HTMLreportListenser"/>	
+     <listener class-name="com.github.uniqueT.webAuto.util.testNG.report.HTMLreportListenser"/>	
   </listeners>
   <test name="test" enabled="true">
      <classes>
         <!-- LocalExecuteTest for local test and RemoteExecuteTest for remote test -->
-        <class name="com.github.smoketest.launcher.seleLauncher.LocalExecuteTest">
+        <class name="com.github.uniqueT.webAuto.launcher.seleLauncher.LocalExecuteTest">
            <methods>
               <!-- set browser, support ie and chrome for now-->
               <include name="chrome"/>

@@ -1,35 +1,34 @@
 package com.github.smoketest.cbs.testScene;
 
-import com.github.smoketest.testScene.AbstractTestScene;
-import com.github.smoketest.util.CommonUtil;
-import com.github.smoketest.util.testNG.log.Logger;
+import com.github.uniqueT.webAuto.testScript.AbstractTestScene;
+import com.github.uniqueT.webAuto.testScript.anno.SceneComment;
+import com.github.uniqueT.webAuto.util.CommonUtil;
+import com.github.uniqueT.webAuto.util.testNG.log.Logger;
 import com.github.smoketest.cbs.testCase.LoginPage;
 import com.github.smoketest.cbs.testCase.MenuCase;
 import com.github.smoketest.cbs.testCase.QueryCheckPage;
 
+@SceneComment("newcheckSmokeTest")
 public class NewCheck extends AbstractTestScene {
 
 	@Override
 	public void doTest() {
 		//long startTime = System.currentTimeMillis();
-		Logger.customLog("====== 开始登录 ==========");
-		LoginPage.login("username", "password");
-		LoginPage.selectCBSUser("beijing");
+		Logger.stringLog("====== 开始登录 ==========");
+		c(LoginPage::login, "username","password");
+		c(LoginPage::selectCBSUser, "beijing");
 		
-		Logger.customLog("====== check操作 ==========");
-		MenuCase.openMenu("ParentMenu.subMenu");
-		QueryCheckPage.searchPolicy("123456987654");
-		CommonUtil.takeScreenShot(driver);
-		
-		Logger.customLog("======= 退出系统 ==========");
-		LoginPage.logout();
-		CommonUtil.takeScreenShot(driver);
-		//Logger.customLog("实际耗时："+((System.currentTimeMillis()-startTime)/1000));
+		Logger.stringLog("====== check操作 ==========");
+		c(MenuCase::openMenu, "ParentMenu.subMenu");
+		c(QueryCheckPage::searchPolicy, "123456987654");
+		CommonUtil.takeScreenShot();
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "newcheck冒烟测试";
+	public void doLast() {
+		Logger.stringLog("======= 退出系统 ==========");
+		c(LoginPage::logout);
+		CommonUtil.takeScreenShot();
 	}
 
 }

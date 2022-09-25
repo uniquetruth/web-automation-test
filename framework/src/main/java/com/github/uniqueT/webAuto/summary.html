@@ -1,0 +1,73 @@
+<html>
+  <head>
+  </head>
+  <body>
+  
+    This is a web ui test framework based on testNG and Selenium. Please use it with Gradle.
+    
+    <h3>run.xml</h3>
+    <p>Should follow all rules of TestNG and this framework. Start test by java org.testng.TestNG run.xml. Here is an example:</p>
+    <p><pre><code><div style="background-color:#EFEFEF;border:black solid thin">&lt;!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"&gt;
+&lt;suite name="MyTest"&gt;
+  &lt;!-- home page of the application --&gt;
+  &lt;parameter name="webroot" value="http://10.18.3.17:9001/esales"/&gt;
+  &lt;!-- list of test scenes, separated by ; --&gt;
+  &lt;parameter name="scenes" 
+            value="com.github.uniqueT.testScene.prodScene.InsureProd1132;
+                   com.github.uniqueT.testScene.prodScene.InsureProd1168;
+                   &commat;FindCustomersPolicyInfo"/&gt;
+  &lt;!-- if value starts with @, this framework will find the scene class with SceneComment annotation whose value is the String after @ --&gt;
+  
+  &lt;parameter name="remoteIp" value="10.18.3.80"/&gt;
+  &lt;parameter name="remotePort" value="4444"/&gt;
+  &lt;!-- config of driver's path, validity in local executing. For remote executing, config this in selenium server's starting parameters--&gt;
+  &lt;parameter name="iedriver" value="D:/tms_auto_ci/runFrame/IEDriverServer.exe"/&gt;
+  &lt;parameter name="chromedriver" value="D:/Share/selenium/chromedriver.exe"/&gt;
+  &lt;!-- set directory of report, default is "report" --&gt;
+  &lt;!-- &lt;parameter name="outputDir" value="report"/&gt; --&gt;
+  &lt;!-- implicit wait time,  default is 10s --&gt;
+  &lt;!-- &lt;parameter name="default_wait_seconds" value="5"/&gt; --&gt;
+  &lt;!-- whether all scenes use one driver, if false, new a drvier object before every scene--&gt;
+  &lt;!-- &lt;parameter name="public_driver" value="false"/&gt; --&gt;
+  
+  &lt;listeners&gt;
+     &lt;listener class-name="com.github.uniqueT.webAuto.util.testNG.report.HTMLreportListenser"/&gt;	
+  &lt;/listeners&gt;
+  &lt;test name="test" enabled="true"&gt;
+     &lt;classes&gt;
+        &lt;!-- LocalExecuteTest for local test and RemoteExecuteTest for remote test --&gt;
+        &lt;class name="com.ulic.test.webui.launcher.seleLauncher.LocalExecuteTest"&gt;
+           &lt;methods&gt;
+              &lt;!-- set browser, support ie and chrome for now --&gt;
+              &lt;include name="chrome"/&gt;
+           &lt;/methods&gt;
+     	&lt;/class&gt;
+     &lt;/classes&gt;
+  &lt;/test&gt;
+&lt;/suite&gt;</div></code></pre><br></br></p>
+
+    <h3>About test script.</h3>
+    <p>Business test scenes should extend AbstractTestScene. Before write any scripts, make sure you've checked javadoc in com.github.uniqueT.webAuto.testScript.</p>
+    <p>You can write normal selenium code directly from YourTestScenen.doTest() method. But I suggest to write scripts following sonme fraemworks rules, so that you can get enough conveniences from the framework.</p>
+    <p>Test scene should invoke test cases. The case's class should extend AbstractTestCase.</p>
+    <p>Test case should invoke events in the com.github.uniqueT.webAuto.event package.</p>
+    <p>Here is an example: </p>
+    <pre><code><div style="background-color:#EFEFEF;border:black solid thin">public class MyScene extends AbstractTestScene {
+    
+      public void doTest() {
+          //equals to SampleCase.doLogin();
+          c(SampleCase::doLogin);
+      }
+  }</div></code></pre>
+    <pre><code><div style="background-color:#EFEFEF;border:black solid thin">public class SampleCase extends AbstractTestCase {
+    
+    public void doLogin() {
+        //equals to driver.findElement(By.id("username")).sendKeys(username)
+        e(InputTextEvent::sendKeys, By.id("username"), username);
+        e(InputTextEvent::sendKeys, By.id("password"), password);
+        //equals to driver.findElement(By.xpath("//a[text()='Login']")).click()
+        e(ElementEvent::click, By.xpath("//a[text()='Login']"));
+    }
+}</div></code></pre>
+  </body>
+</html>

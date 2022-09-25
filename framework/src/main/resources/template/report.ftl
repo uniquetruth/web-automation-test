@@ -58,12 +58,52 @@ div.summary p {
 	margin: 12px 0 0 0;
 	line-height: 150%;
 	}
-
+span.up {
+	width:0;
+	height:0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 8px solid #535353;
+	position:relative;
+	top: -15px;
+	left: 10px;
+}
+span.up:hover {
+	width:0;
+	height:0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 8px solid Chocolate;
+	position:relative;
+	top: -15px;
+	left: 10px;
+}
+span.down {
+	width:0;
+	height:0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 8px solid #535353;
+	position:relative;
+	top: 15px;
+	left: 10px;
+}
+span.down:hover {
+	width:0;
+	height:0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 8px solid Chocolate;
+	position:relative;
+	top: 15px;
+	left: 10px;
+}
 table.dataintable {
 	margin-top:10px;
 	border-collapse:collapse;
 	border:1px solid #aaa;
 	width:100%;
+	table-layout: fixed;
 	}
 
 table.dataintable th {
@@ -77,8 +117,9 @@ table.dataintable th {
 table.dataintable td {
 	vertical-align:text-top;
 	padding:5px 15px 5px 5px;
-	background-color:#efefef;
 	border:1px solid #aaa;
+	word-break: break-all;
+	word-wrap:break-word;
 	}
 table.dataintable td.fail {
 	background-color:#FF5353;
@@ -100,6 +141,8 @@ table.dataintable pre {
 div.image{
 	position: absolute;
 	left: 30px;
+	border: 2px solid #a1a1a1;
+	border-radius:5px;
 }
     </style>
     <script type="text/javascript">
@@ -115,6 +158,44 @@ div.image{
     			lastImgId = id;
     		}else{
     			i.style.display = 'none';
+    		}
+    	}
+    	function showCaseScope(obj, clzName){
+    		var trNodes = document.getElementsByClassName(clzName);
+    		for(i=0;i<trNodes.length;i++){
+    			//trNodes[i].style="background-color: #B5E3FD;";
+    			trNodes[i].style.backgroundColor="#B5E3FD";
+    		}
+    		obj.style.backgroundColor="#8BD5FC";
+    	}
+    	function defaultCaseScope(obj, clzName){
+    		var trNodes = document.getElementsByClassName(clzName);
+    		for(i=0;i<trNodes.length;i++){
+    			trNodes[i].style.backgroundColor="";
+    		}
+    		obj.style.backgroundColor="";
+    	}
+    	const hiddenRows = new Set();
+    	function togglePanel(obj, clzName){
+    		if(obj.className=="up"){
+    			obj.className="down";
+    			obj.title="expand";
+    			var trNodes = document.getElementsByClassName(clzName);
+    			for(i=0;i<trNodes.length;i++){
+    			  trNodes[i].style.display="none";
+    		  }
+    		  hiddenRows.add(clzName);
+    		}else{
+    			obj.className="up";
+    			obj.title="collapse";
+    			hiddenRows.delete(clzName);
+    			var trNodes = document.getElementsByClassName(clzName);
+    			for(i=0;i<trNodes.length;i++){
+    			  if(hiddenRows.has(trNodes[i].className)){
+    				continue;
+    			  }
+    			  trNodes[i].style.display="table-row";
+    		  }
     		}
     	}
     </script>
@@ -133,19 +214,19 @@ div.image{
               <th width="25%">Test name</th>
               <th width="10%">Browser</th>
               <th width="15%">executor IP</th>
-			  <th width="10%">Scene</th>
-			  <th width="10%">Passed</th>
-			  <th width="15%">Passed rate</th>
-			  <th width="15%">Total duration</th>
+              <th width="10%">Scene</th>
+              <th width="10%">Passed</th>
+              <th width="15%">Passed rate</th>
+              <th width="15%">Total duration</th>
 		    </tr>
 		    <tr>
 		      <td>${suiteName}</td>
 		      <td>${browserName}</td>
 		      <td>${runIP}</td>
-			  <td>${sceneCount}</td>
-			  <td>${scenePassCount}</td>
-			  <td>${(scenePassCount * 100 / sceneCount)?string('#.##')}%</td>
-			  <td>${totalDuration}</td>
+		      <td>${sceneCount}</td>
+		      <td>${scenePassCount}</td>
+		      <td>${(scenePassCount * 100 / sceneCount)?string('#.##')}%</td>
+		      <td>${totalDuration}</td>
 		    </tr>
 		  </tbody>
 	    </table>
@@ -171,7 +252,7 @@ div.image{
 			</div>
 			<#list sceneDetail as d>
 			<div class="summary">
-				<h2><a name="${d.sceneName}"></a>${d.sceneName}</h2>
+				<h2 title="${d.sceneClassName}"><a name="${d.sceneName}"></a>${d.sceneName}</h2>
 			</div>
 			<div class="details">
 				<table class="dataintable">
@@ -183,31 +264,38 @@ div.image{
 							<th>Data</th>
 						</tr>
 						<#list d.logList as dlist>
-						<#if (dlist.logType=="eventLog")>
-	          <tr>
+						
+						<#if (dlist.logType=="caseLog")>
+						<tr class="${dlist.trClass}" onmouseenter="showCaseScope(this, '${dlist.subEvent}')" onmouseleave="defaultCaseScope(this, '${dlist.subEvent}')">
+						  <td>case<span class="up" onclick="togglePanel(this, '${dlist.subEvent}')" title="collapse"></span></td>
+						  <td colspan="2"><span title="${dlist.caseName}">${dlist.caseComment}</span></td>
+						  <td>time cost: ${dlist.costTime}s</td>
+						</tr>
+						<#elseif (dlist.logType=="eventLog")>
+						<tr class="${dlist.trClass}">
 						  <td>${dlist.className}</td>
 						  <td>${dlist.method}</td>
 						  <td>${dlist.location}</td>
 						  <td>${dlist.parameter!}</td>
-					  </tr>
-					  <#elseif (dlist.logType=="exceptionLog")>
-					  <tr>
-					  	<td class="fail">Exception</td>
+						</tr>
+					    <#elseif (dlist.logType=="exceptionLog")>
+					    <tr class="${dlist.trClass}">
+					      <td class="fail">Exception</td>
 						  <td colspan="3">${dlist.message}</td>
 						</tr>
-					  <#elseif (dlist.logType=="screenShotLog")>
-					  <tr>
-					  	<td>screen shot</td>
+					    <#elseif (dlist.logType=="screenShotLog")>
+					    <tr class="${dlist.trClass}">
+					  	  <td>screen shot</td>
 						  <td colspan="3">see screen shot&nbsp;<a onclick="showImage('${dlist.imgId}')" href="javascript:void(0)">${dlist.filename}</a></td>
 						</tr>
-						<tr><td colspan="4" style="padding:0;border:0"><div id="${dlist.imgId}" class="image" style="display:none"><img src="${dlist.filename}"/></div></td></tr>
-					  <#else>
-					  <tr>
+						<tr class="${dlist.trClass}"><td colspan="4" style="padding:0;border:0"><div id="${dlist.imgId}" class="image" style="display:none"><img src="${dlist.filename}"/></div></td></tr>
+					    <#else>
+					    <tr class="${dlist.trClass}">
 						  <td>text log</td>
 						  <td colspan="3">${dlist.message}</td>
-					  </tr>
-					  </#if>                    
-            </#list>
+						</tr> 
+					    </#if>   
+                        </#list>
 					</tbody>
 				</table>
 		  </div>

@@ -6,6 +6,7 @@ build
 
 .settings
 .project
+.vscode
 bin
 framework/bin
 framework/build
