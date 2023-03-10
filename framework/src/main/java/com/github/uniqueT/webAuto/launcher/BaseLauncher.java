@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.internal.TestResult;
@@ -67,6 +68,12 @@ public abstract class BaseLauncher {
 				tr.setAttribute("startTime", System.currentTimeMillis());
 				testScene.doTest(tr);
 				tr.setStatus(ITestResult.SUCCESS);
+			}catch (UnhandledAlertException e) {
+				tr.setStatus(ITestResult.FAILURE);
+				CommonUtil.takeScreenShot();
+				e.printStackTrace();
+				Logger.exceptionLog(e);
+				driver.switchTo().alert().dismiss();
 			}catch (Exception e) {
 				tr.setStatus(ITestResult.FAILURE);
 				CommonUtil.fullScreenShot();
